@@ -17,6 +17,8 @@ import urllib
 import urlparse
 import hashlib
 
+import localmedia
+
 PERCENT_RATINGS = {
   'rottentomatoes','rotten tomatoes','rt','flixster'
 }
@@ -1057,6 +1059,11 @@ class xbmcnfotv(Agent.TV_Shows):
 														Log('Error download episode thumbnail %s for %s season %s from url: %s', ep_num,  metadata.title, season_num, str(e))
 												except Exception, e:
 													Log('Error finding episode thumbnail %s for %s season %s from url: %s', ep_num,  metadata.title, season_num, str(e))
+
+                                        #find subtitle for episode
+										for i in media.seasons[season_num].episodes[ep_num].items:
+											for part in i.parts:
+												localmedia.findSubtitles(part)
 
 										Log("---------------------")
 										Log("Episode (S"+season_num.zfill(2)+"E"+ep_num.zfill(2)+") nfo Information")
